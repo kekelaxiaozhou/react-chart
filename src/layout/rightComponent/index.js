@@ -11,8 +11,8 @@ import bMap from './bmap';
 
 export default class RightComponent extends React.Component {
     getDefaultMenu(data){
-        if(data[0].child){
-            return this.getDefaultMenu(data[0].child);
+        if(data[0].subMenus){
+            return this.getDefaultMenu(data[0].subMenus);
         }else {
             return data[0].url;
         }

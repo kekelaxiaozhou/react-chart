@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { Layout, Icon } from 'antd';
 import LeftComponent from './leftComponent';
 import RightComponent from './rightComponent';
@@ -16,6 +17,11 @@ class Main extends React.Component {
         });
     };
 
+    loginOut = () => {
+        localStorage.clear();
+        window.location.href = window.location.origin;
+    }
+
     render() {
         return (
             <Layout>
@@ -30,6 +36,7 @@ class Main extends React.Component {
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
                             onClick={this.toggle}
                         />
+                        <span style={{float:'right', marginRight: 20, cursor: 'pointer'}} onClick={this.loginOut}>退出登录</span>
                     </Header>
                     <Content
                         style={{
@@ -47,4 +54,4 @@ class Main extends React.Component {
     }
 }
 
-export default Main;
+export default withRouter(Main);

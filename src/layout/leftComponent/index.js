@@ -3,7 +3,6 @@ import { Menu } from 'antd';
 import { withRouter } from 'react-router-dom';
 import IconFont from '../../iconfont';
 import menuLists from './menus';
-import { labeledStatement } from '@babel/types';
 const { SubMenu } = Menu;
 
 class LeftComponent extends React.Component {
@@ -14,9 +13,9 @@ class LeftComponent extends React.Component {
     }
 
     componentDidMount(){
-        let current = this.props.location.pathname;
         let openKeys = [], rootSubmenuKeys = [];
         setTimeout(() => {
+            let current = this.props.location.pathname;
             menuLists.forEach(item => {
                 if(item.subMenus){
                     item.subMenus.forEach(ele => {
