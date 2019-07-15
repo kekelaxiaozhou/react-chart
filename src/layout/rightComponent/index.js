@@ -1,12 +1,10 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import menuLists from 'src/layout/leftComponent/menus'
-import bizchartsBar from './bizcharts/bar';
-import bizchartsLine from './bizcharts/line';
-import bizchartsPie from './bizcharts/pie';
-import echartsBar from './echarts/bar';
-import echartsLine from './echarts/line';
-import echartsPie from './echarts/pie';
+import bizcharts from './bizcharts';
+import echartsBasic from './echarts/basic';
+import echartsChina from './echarts/china';
+import echartsWorld from './echarts/world';
 import bMap from './bmap';
 
 export default class RightComponent extends React.Component {
@@ -22,14 +20,12 @@ export default class RightComponent extends React.Component {
         return (
             <Switch>
                 {/* bizcharts */}
-                <Route exact path="/bizcharts/bar" component={bizchartsBar}></Route>
-                <Route exact path="/bizcharts/line" component={bizchartsLine}></Route>
-                <Route exact path="/bizcharts/pie" component={bizchartsPie}></Route>
+                <Route exact path="/bizcharts" component={bizcharts}></Route>
 
                 {/* echarts */}
-                <Route exact path="/echarts/bar" component={echartsBar}></Route>
-                <Route exact path="/echarts/line" component={echartsLine}></Route>
-                <Route exact path="/echarts/pie" component={echartsPie}></Route>
+                <Route exact path="/echarts/basic" component={echartsBasic}></Route>
+                <Route exact path="/echarts/china" component={echartsChina}></Route>
+                <Route exact path="/echarts/world" component={echartsWorld}></Route>
 
                 {/* bmap */}
                 <Route exact path="/bmap" component={bMap}></Route>

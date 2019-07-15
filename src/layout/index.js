@@ -40,9 +40,7 @@ class Main extends React.Component {
                     </Header>
                     <Content
                         style={{
-                            margin: '20px 16px',
                             padding: 24,
-                            background: '#fff',
                             minHeight: 280,
                         }}
                     >
