@@ -4,7 +4,7 @@ import 'echarts/map/js/china';
 import geoCoordMap from 'src/utils/geoCoordMap';
 import spreadData from '../data/china.json';
 
-export default class MapChina extends Component {
+export default class MapOne extends Component {
     state={
         sDatas: [],
     }
