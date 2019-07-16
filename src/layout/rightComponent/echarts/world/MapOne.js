@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import echarts from 'echarts';
 import 'echarts/map/js/world';
-import nameMap from './nameMap';
 import worldGeo from './world'
-for (let key in nameMap) {
-    nameMap[key.toLowerCase()] = nameMap[key];
-}
 
 export default class MapOne extends Component {
     state = {
