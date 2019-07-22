@@ -6,6 +6,7 @@ import echartsBasic from './echarts/basic';
 import echartsChina from './echarts/china';
 import echartsWorld from './echarts/world';
 import bMap from './bmap';
+import gridLayout from './gridlayout'
 
 export default class RightComponent extends React.Component {
     getDefaultMenu(data){
@@ -29,6 +30,9 @@ export default class RightComponent extends React.Component {
 
                 {/* bmap */}
                 <Route exact path="/bmap" component={bMap}></Route>
+
+                {/* React-Grid-Layout */}
+                <Route exact path="/gridlayout" component={gridLayout}></Route>
 
                 <Route path="*" render={(props) => <Redirect to={defaultMenu}/>}></Route>
             </Switch>
