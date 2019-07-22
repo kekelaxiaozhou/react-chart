@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import echarts from 'echarts';
 import 'echarts/map/js/world';
 import worldGeo from './world'
+import { Card, Button } from 'antd';
+import IconFont from 'src/iconfont';
 
 export default class MapOne extends Component {
     state = {
@@ -183,9 +185,32 @@ export default class MapOne extends Component {
         this.state.myChart.setOption(option); 
     }
 
+    exportMap = () => {
+        var picInfo = this.state.myChart.getDataURL({
+            type:"jpeg",
+            backgroundColor:"white"
+        });
+        let $a = document.createElement('a');
+        $a.setAttribute("href", picInfo);
+        $a.setAttribute("download", "世界地图");
+        $a.click();
+    }
+
     render() {
         return (
-            <div id={'MapOne'} style={{height: 700}}></div>
+            <Card title={
+                <div>
+                    <div className="common-title">世界地图
+                        <div style={{float:"right"}}>
+                            <Button theme="outlined" style={{padding:"0px 8px"}} onClick={this.exportMap}>
+                                <IconFont type={'icon-daochu1'} />
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            }>
+                <div id={'MapOne'} style={{height: 600}}></div>
+            </Card>
         );
     }
 }

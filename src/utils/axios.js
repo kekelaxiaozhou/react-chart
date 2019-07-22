@@ -1,8 +1,21 @@
 import axios from 'axios';
 import Qs from "qs";
 import { message } from 'antd';
-// import { clearLocal } from './utils';
-import {showLoading,hideLoading} from '../common/loading/loading'
+
+let hideLoadingDom = () => {
+    let loadingDom = window.document.getElementById("loadingDom");
+    if(loadingDom){
+        loadingDom.style.display = "none";
+    }
+}
+
+let showloadingDom = () => {
+    let loadingDom = window.document.getElementById("loadingDom");
+    if(loadingDom){
+        loadingDom.style.display = "flex";
+    }
+}
+
 //请求 头contentTpye类型
 const contentTpyeArrs = [
     "application/json",
@@ -12,7 +25,7 @@ const contentTpyeArrs = [
 //基本设置
 let options = {
     baseURL: "",
-    timeout: 60000,
+    timeout: 10000,
     headers: {
         post: {
             'Content-Type': contentTpyeArrs[0]
@@ -35,7 +48,7 @@ ajax.interceptors.request.use((config) => {  //在请求发出之前进行一些
     };
     if (reqNumer > 0) {
         // 显示加载动画
-        showLoading()
+        showloadingDom();
     }
     
     return config;
@@ -51,22 +64,20 @@ ajax.interceptors.response.use((response) => {  // 接受请求后reqNumer--，�
     if (reqNumer <= 0) {
         reqNumer = 0;
         // 隐藏加载动画
-        hideLoading()
+        hideLoadingDom();
     } else {
-        
+        showloadingDom();
     }
     //统一处理返回数据
     const useResponse = response.data;
     if (useResponse.success) {
         return { "success": true, "obj": useResponse["obj"] };
     } else {
-        if (useResponse.errorCode === "403") {
-            // clearLocal();
-            hideLoading()
+        if (useResponse.errorCode === 5) {//未登录过期，重定向
+            window.localStorage.clear();
+            window.location.href = `http://${window.location.host}`;
+            hideLoadingDom();
             return { "success": false };
-            // step1：退出登录(后台);
-            // step2：前端(重写本地存储);
-            // step3：页面(重定向至登录注册页面)
         } else {
             return { "success": false, "obj": useResponse["msg"] };
         }
@@ -74,23 +85,11 @@ ajax.interceptors.response.use((response) => {  // 接受请求后reqNumer--，�
 }, function (error) {
     // 对响应错误做点什么
     if (error && error.response) {
-        switch (error.response.status) {
-            case 400: message.warn('请求错误') ; break;
-            case 401: message.warn('未授权，请重新登录'); break;
-            case 403: message.warn('拒绝访问'); break;
-            case 404: message.warn('请求出错'); break;
-            case 408: message.warn('请求超时'); break;
-            case 500: message.warn('服务器错误'); break;
-            case 501: message.warn('服务未实现'); break;
-            case 502: message.warn('网络错误'); break;
-            case 503: message.warn('服务不可用'); break;
-            case 504: message.warn('网络超时(504)'); break;
-            case 505: message.warn('HTTP版本不受支持'); break;
-            default: message.warn(`连接出错!`);
-        }
+        message.warn(error.response.statusText);
+        // break;
         reqNumer--;
         if (reqNumer <= 0) {
-            hideLoading()
+            hideLoadingDom();
         }
         return Promise.reject(error);
 
@@ -98,7 +97,7 @@ ajax.interceptors.response.use((response) => {  // 接受请求后reqNumer--，�
         message.warn("请求超时");
         reqNumer--;
         if (reqNumer <= 0) {
-            hideLoading()
+            hideLoadingDom();
         }
         return Promise.reject(error);
     }
