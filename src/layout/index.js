@@ -29,8 +29,8 @@ class Main extends React.Component {
                     <div className={styles.logo + ' ' + (this.state.collapsed?styles.smalllogo:styles.biglogo)}>Charts展览</div>
                     <LeftComponent/>
                 </Sider>
-                <Layout style={{height: '100vh', display: 'flex'}}>
-                    <Header style={{ background: '#fff', padding: 0 }}>
+                <Layout id={'layout-id'} style={{height: '100vh', display: 'flex'}}>
+                    <Header style={{ background: '#fff', padding: 0}}>
                         <Icon
                             className={styles.trigger}
                             type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
