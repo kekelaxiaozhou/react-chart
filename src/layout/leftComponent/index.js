@@ -9,7 +9,8 @@ class LeftComponent extends React.Component {
     state = {
         rootSubmenuKeys:[],
         openKeys: [],
-        current: ''
+        current: '',
+        highLight: false
     }
 
     componentDidMount(){
@@ -32,13 +33,12 @@ class LeftComponent extends React.Component {
     }
 
     selectClick = ({key}) => {
-        this.setState({current: key})
+        this.setState({current: key, highLight: false});
         this.props.history.push(key);
     }
 
     onOpenChange = (openKeys) => {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
-        console.log(latestOpenKey);
         if(this.state.rootSubmenuKeys.indexOf(latestOpenKey) === -1){
             this.setState({openKeys})
         }else {
@@ -46,11 +46,18 @@ class LeftComponent extends React.Component {
         }
     }
 
+    onTitleClick = (obj) => {
+        this.setState({highLight: true, current: ''});
+        this.props.history.push(obj.key);
+    }
+
     renderMenus = (data) => data[0] && data.map(item => {
         if(item.subMenus && item.subMenus[0]){
             return (
                 <SubMenu
                     key={item.url}
+                    onTitleClick={this.onTitleClick}
+                    style={this.state.highLight ? {background:'#1890ff'} : {background: null}}
                     title={
                         <span>
                             <IconFont type={item.icon} />
@@ -77,6 +84,7 @@ class LeftComponent extends React.Component {
             
         }
     })
+
 
     render(){
         return (

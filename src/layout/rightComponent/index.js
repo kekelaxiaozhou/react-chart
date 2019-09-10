@@ -2,11 +2,13 @@ import React from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import menuLists from 'src/layout/leftComponent/menus'
 import bizcharts from './bizcharts';
+import echartsIndex from './echarts/index';
 import echartsBasic from './echarts/basic';
 import echartsChina from './echarts/china';
 import echartsWorld from './echarts/world';
 import bMap from './bmap';
 import gridLayout from './gridlayout'
+import autoTable from './autoTable'
 
 class RightComponent extends React.Component {
     getDefaultMenu(data){
@@ -65,6 +67,7 @@ class RightComponent extends React.Component {
                 <Route exact path="/bizcharts" component={bizcharts}></Route>
 
                 {/* echarts */}
+                <Route exact path="/echarts/index" component={echartsIndex}></Route>
                 <Route exact path="/echarts/basic" component={echartsBasic}></Route>
                 <Route exact path="/echarts/china" component={echartsChina}></Route>
                 <Route exact path="/echarts/world" component={echartsWorld}></Route>
@@ -74,6 +77,9 @@ class RightComponent extends React.Component {
 
                 {/* React-Grid-Layout */}
                 <Route exact path="/gridlayout" component={gridLayout}></Route>
+
+                {/* autoTable */}
+                <Route exact path="/autotable" component={autoTable}></Route>
 
                 <Route path="*" render={(props) => <Redirect to={defaultMenu}/>}></Route>
             </Switch>

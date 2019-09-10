@@ -6,7 +6,7 @@ export default [
     },
     {
         name: 'Echarts', 
-        url: '/echarts', 
+        url: '/echarts/index', 
         icon: 'icon-echarts_chart', 
         subMenus: [
             {name: '基础图', url: '/echarts/basic'},
@@ -22,6 +22,11 @@ export default [
     {
         name: 'React-Grid-Layout',  //网格布局(grid layout)系统，但专为 React 服务
         url: '/gridlayout', 
+        icon: 'icon-grid',
+    },
+    {
+        name: 'AutoTable',  //网格布局(grid layout)系统，但专为 React 服务
+        url: '/autotable', 
         icon: 'icon-grid',
     }
 ]
